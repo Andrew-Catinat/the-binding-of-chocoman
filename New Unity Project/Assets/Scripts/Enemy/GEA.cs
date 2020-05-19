@@ -4,20 +4,20 @@ using UnityEngine;
 
 
 public class GEA : Enemy
-{
+{  
 
-    private float hitTime = 2; //time in seconds between each hit
-    private float curTime = 0; //time in seconds since last hit
+    private Player player;
 
     public GEA():base(){
         this.health = 4;
         this.strength = 1;
         this.dexterity = 1;
         this.moveSpeed = 4f;
-        this.attackRadius = 1.5f;
+        this.attackRadius = 1f;
     }
 
     void Start(){
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
         target = GameObject.FindWithTag("Player").transform;
     }
 
@@ -25,16 +25,19 @@ public class GEA : Enemy
     void FixedUpdate()
     {   
 
-        if(!dead){
-            curTime += Time.deltaTime;
-            Move();
-            if(Vector3.Distance(target.position, transform.position) < attackRadius){
-                if(curTime >= hitTime){
+
+        //Player alive
+        if(!player.isDead()){
+         if(target != null){
+            //ennemy not dead
+            if(!dead){
+                Move();
+                if(Vector3.Distance(target.position, transform.position) < attackRadius){
                     Attack();
                 }
             }
-        }
-            
+        }    
+        }         
     }
 
     public override void Move(){
@@ -91,11 +94,7 @@ public class GEA : Enemy
     }
 
     private void Attack(){
-        Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        if(!player.isDead()){
-            curTime = 0; //reset the time
-            player.TakeDamage(this.GetStrength());
-        }
+        player.TakeDamage(this.GetStrength());
     }
 
     private IEnumerator DamageTakenCo(){
