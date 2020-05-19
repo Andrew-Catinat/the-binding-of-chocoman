@@ -8,6 +8,7 @@ public class Door : MonoBehaviour
     public RoomTransfer transfer;
     public Sprite door_open;
     public Sprite door_close;
+    public SpriteRenderer spriteRenderer;
 
     public void show(){
         this.GetComponent<Renderer>().enabled = true;
@@ -17,5 +18,7 @@ public class Door : MonoBehaviour
         this.GetComponent<Renderer>().enabled = false;
     }
 
-  
+  void Start(){
+      this.spriteRenderer.sprite = door_close;
+  }
 }

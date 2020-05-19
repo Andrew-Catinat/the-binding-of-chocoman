@@ -23,16 +23,16 @@ public class Stage : MonoBehaviour
         };
         
         stage = matrice;
-Debug.Log(stage[0,0]);
-        for(int i = 0; i < matrice.Length; i++){
-            for(int j = 0; j < matrice.Length; j++){
+        Debug.Log(stage[0,0]);
+       /* for(int i = 0; i <= matrice.Length; i++){
+            for(int j = 0; j <= matrice.Length; j++){
                 //Debug.Log("i : " + i + " / j : " + j + " / true/false : " + stage[i,j]);
                 if(stage[i,j]){
                   Instantiate(room, new Vector2(39 * i , 21 * j), Quaternion.identity);
                 }
             }
         }
-
+*/
     }
 
 
