@@ -13,7 +13,7 @@ public class PlayerHit : MonoBehaviour
         {
             Enemy enemy = other.GetComponent<Enemy>() ;
             //Penser méthode Singleton avec un manager
-            Player player = (Player)GameObject.FindWithTag("Player").GetComponent<Player>();
+            Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
             if(!isColliding){
                 isColliding = true;
                 enemy.TakeDamage(player.GetStrength());

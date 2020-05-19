@@ -5,12 +5,16 @@ using UnityEngine;
 
 public class GEA : Enemy
 {
+
+    private float hitTime = 2; //time in seconds between each hit
+    private float curTime = 0; //time in seconds since last hit
+
     public GEA():base(){
         this.health = 4;
         this.strength = 1;
         this.dexterity = 1;
         this.moveSpeed = 4f;
-        this.attackRadius = 2f;
+        this.attackRadius = 1f;
     }
 
     void Start(){
@@ -20,8 +24,17 @@ public class GEA : Enemy
     // Update is called once per frame
     void FixedUpdate()
     {   
-        if(!dead)
+
+        if(!dead){
+            curTime += Time.deltaTime;
             Move();
+            if(Vector3.Distance(target.position, transform.position) < attackRadius){
+                if(curTime >= hitTime){
+                    Attack();
+                }
+            }
+        }
+            
     }
 
     public override void Move(){
@@ -69,13 +82,19 @@ public class GEA : Enemy
     public override void TakeDamage(int damage)
     {
         StartCoroutine(DamageTakenCo());
-        Debug.Log(this.health);
         base.TakeDamage(damage);
     }
 
     public override void Die(){
         this.dead = true;
         StartCoroutine(DieCo());
+    }
+
+    private void Attack(){
+        curTime = 0; //reset the time
+        Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        player.TakeDamage(this.GetStrength());
+        Debug.Log("Attaque");
     }
 
     private IEnumerator DamageTakenCo(){
