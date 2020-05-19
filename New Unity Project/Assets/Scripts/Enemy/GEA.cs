@@ -14,7 +14,7 @@ public class GEA : Enemy
         this.strength = 1;
         this.dexterity = 1;
         this.moveSpeed = 4f;
-        this.attackRadius = 1f;
+        this.attackRadius = 1.5f;
     }
 
     void Start(){
@@ -91,10 +91,11 @@ public class GEA : Enemy
     }
 
     private void Attack(){
-        curTime = 0; //reset the time
         Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        player.TakeDamage(this.GetStrength());
-        Debug.Log("Attaque");
+        if(!player.isDead()){
+            curTime = 0; //reset the time
+            player.TakeDamage(this.GetStrength());
+        }
     }
 
     private IEnumerator DamageTakenCo(){

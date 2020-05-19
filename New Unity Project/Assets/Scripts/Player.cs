@@ -53,11 +53,28 @@ public class Player : Entity
     }
 
     public override void TakeDamage(int damage){
-        //Ajouter Animation de dégats
+        StartCoroutine(DamageTakenCo());
         base.TakeDamage(damage);
     }
 
     public override void Die(){
+        //animator.SetBool("dead", true);
+        this.dead = true;
+        StartCoroutine(DieCo());
+        //this.gameObject.SetActive(false);
+    }
+
+    private IEnumerator DamageTakenCo(){
+        animator.SetBool("takeDamage", true);
+        yield return null;
+        animator.SetBool("takeDamage", false);
+        yield return new WaitForSeconds(2f);
+    }
+
+    private IEnumerator DieCo(){
+        animator.SetBool("dead", true);
+        //Désactiver hitbox
+        yield return new WaitForSeconds(3f);
         this.gameObject.SetActive(false);
     }
 
