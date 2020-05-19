@@ -6,27 +6,29 @@ public class Stage : MonoBehaviour
 {
    
     [SerializeField]
-    private Player player;
+    public Player player;
 
     [SerializeField]
-    private Room room;
+    public Room room;
     private bool[,] stage;
-    private int sizeStage = 1;
+    //private int sizeStage = 3;
 
     void Start(){
         //Instantiate(player, new Vector2(0, 0), Quaternion.identity);
         
         bool[,] matrice = { 
-            { true, true}, 
-            { true, true } 
+            { true, true, true}, 
+            { true, true, true},
+            { true, true, true}
         };
         
         stage = matrice;
-
-        for(int i = 0; i <= this.sizeStage; i++){
-            for(int j = 0; j <= this.sizeStage; j++){
+Debug.Log(stage[0,0]);
+        for(int i = 0; i < matrice.Length; i++){
+            for(int j = 0; j < matrice.Length; j++){
+                //Debug.Log("i : " + i + " / j : " + j + " / true/false : " + stage[i,j]);
                 if(stage[i,j]){
-                  //Instantiate(room, new Vector2(37 * i , 20 * j), Quaternion.identity);
+                  Instantiate(room, new Vector2(39 * i , 21 * j), Quaternion.identity);
                 }
             }
         }
