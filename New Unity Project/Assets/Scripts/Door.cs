@@ -18,7 +18,4 @@ public class Door : MonoBehaviour
         this.GetComponent<Renderer>().enabled = false;
     }
 
-  void Start(){
-      this.spriteRenderer.sprite = door_close;
-  }
 }
