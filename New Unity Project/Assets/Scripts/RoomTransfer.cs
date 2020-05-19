@@ -15,7 +15,6 @@ public class RoomTransfer : MonoBehaviour
             Vector3 newCameraPosition = new Vector3(cameraPosition.x + this.cameraChange.x, cameraPosition.y + this.cameraChange.y, cameraPosition.z);
             Camera.main.transform.position = Vector3.Lerp(cameraPosition, newCameraPosition, 1F);
             other.transform.position += playerChange;
-            Debug.Log("Test");
         }
     }
 }
