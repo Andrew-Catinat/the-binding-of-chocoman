@@ -13,12 +13,12 @@ public class GEA : Enemy
         this.attackRadius = 2f;
     }
 
-    void Start(){
+    public void Start(){
         target = GameObject.FindWithTag("Player").transform;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    public void FixedUpdate()
     {   
         if(!dead)
             Move();
@@ -38,7 +38,7 @@ public class GEA : Enemy
         }
     }
     
-    private void ChangeAnim(Vector2 direction){
+    protected void ChangeAnim(Vector2 direction){
         if(Mathf.Abs(direction.x) > Mathf.Abs(direction.y)){
             if(direction.x > 0){
                 SetAnimFloat(Vector2.right);
@@ -54,13 +54,13 @@ public class GEA : Enemy
         }
     }
 
-    private void SetAnimFloat(Vector2 setVector){
+    protected void SetAnimFloat(Vector2 setVector){
         animator.SetFloat("MoveX", setVector.x);
         animator.SetFloat("MoveY", setVector.y);
         animator.SetFloat("Speed", this.moveSpeed);
     }
 
-    private void ChangeState(EnemyState newState){
+    protected void ChangeState(EnemyState newState){
         if(this.currentState != newState){
             currentState = newState;
         }
@@ -78,14 +78,14 @@ public class GEA : Enemy
         StartCoroutine(DieCo());
     }
 
-    private IEnumerator DamageTakenCo(){
+    protected IEnumerator DamageTakenCo(){
         animator.SetBool("takingDamage", true);
         yield return null;
         animator.SetBool("takingDamage", false);
         yield return new WaitForSeconds(.1f);
     }
 
-    private IEnumerator DieCo(){
+    protected IEnumerator DieCo(){
         animator.SetBool("isDead", true);
         //Désactiver hitbox
         yield return new WaitForSeconds(3f);
