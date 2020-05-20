@@ -1,7 +1,15 @@
 ﻿using UnityEngine;
+using System.Collections;
+
+public enum PlayerState{
+    walk,
+    attack,
+    interact
+}
 
 public class Player : MonoBehaviour
 {
+    PlayerState currentState = PlayerState.walk;
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
     public Animator animator;
@@ -14,12 +22,26 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        
+        if(Input.GetButtonDown("attack") && currentState != PlayerState.attack){
+            StartCoroutine(AttackCo());
+        }
+        else if(currentState == PlayerState.walk){
+            movement.x = Input.GetAxisRaw("Horizontal");
+            movement.y = Input.GetAxisRaw("Vertical");    
+            animator.SetFloat("Horizontal", movement.x);
+            animator.SetFloat("Vertical", movement.y);
+            animator.SetFloat("Speed", movement.sqrMagnitude);
+        }
+    }
 
-        animator.SetFloat("Horizontal", movement.x);
-        animator.SetFloat("Vertical", movement.y);
-        animator.SetFloat("Speed", movement.sqrMagnitude);
+    private IEnumerator AttackCo(){
+        animator.SetBool("attacking", true);
+        currentState = PlayerState.attack;
+        yield return null;
+        animator.SetBool("attacking", false);
+        yield return new WaitForSeconds(.3f);
+        currentState = PlayerState.walk;
     }
 
     void FixedUpdate(){

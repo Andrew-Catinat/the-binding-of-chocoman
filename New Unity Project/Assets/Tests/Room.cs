@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Room : MonoBehaviour
-{
+{ 
     
     public Gate gate_left;
     public Gate gate_right;
@@ -17,7 +17,7 @@ public class Room : MonoBehaviour
     }
 
     void Update(){
-        if (Input.GetKeyDown("space"))
+       /* if (Input.GetKeyDown("space"))
         {
             gate_top.hide();
         }
@@ -32,6 +32,6 @@ public class Room : MonoBehaviour
         if (Input.GetKeyDown("n"))
         {   
             gate_left.show();
-        }
+        }*/
     }
 }
