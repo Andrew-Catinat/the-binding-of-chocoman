@@ -95,6 +95,7 @@ public class GEA : Enemy
 
     private void Attack(){
         player.TakeDamage(this.GetStrength());
+        StartCoroutine(AttackCo());
     }
 
     private IEnumerator DamageTakenCo(){
@@ -107,14 +108,14 @@ public class GEA : Enemy
     private IEnumerator DieCo(){
         animator.SetBool("isDead", true);
         //Désactiver hitbox
+        this.rb.isKinematic = true;
         yield return new WaitForSeconds(3f);
         this.gameObject.SetActive(false);
     }
 
-    private IEnumerator AttaqueCo(){
-        // animator.SetBool("isDead", true);
-        // //Désactiver hitbox
-        // yield return new WaitForSeconds(3f);
-        // this.gameObject.SetActive(false);
+    private IEnumerator AttackCo(){
+        animator.SetBool("attack", true);
+        yield return null;
+        animator.SetBool("attack", false);
     }
 }
