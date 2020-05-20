@@ -21,6 +21,7 @@ public class Inventory : MonoBehaviour
 
     public int space = 2;
     public SortedList<string, Item> items = new SortedList<string, Item>();
+    public Item[] tab = new Item[2];
 
     public bool Add(Item item){
         if(items.Count >= space){

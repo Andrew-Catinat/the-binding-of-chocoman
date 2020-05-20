@@ -30,7 +30,7 @@ public abstract class Item : MonoBehaviour
     }
 
     public void Drop(){
-   //     gameObject.SetActive(true);
+        gameObject.SetActive(true);
     }
 
 }
