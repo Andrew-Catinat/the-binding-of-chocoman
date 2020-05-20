@@ -24,20 +24,20 @@ public class GEA : Enemy
     // Update is called once per frame
     void FixedUpdate()
     {   
-
-
         //Player alive
         if(!player.isDead()){
-         if(target != null){
-            //ennemy not dead
-            if(!dead){
-                Move();
-                if(Vector3.Distance(target.position, transform.position) < attackRadius){
-                    Attack();
+            if(target != null){
+                //ennemy not dead
+                if(!dead){
+                    Move();
+                    if(Vector3.Distance(target.position, transform.position) < attackRadius){
+                        Attack();
+                    }
                 }
-            }
-        }    
-        }         
+            }    
+        }else{
+            this.rb.Sleep();
+        }        
     }
 
     public override void Move(){
@@ -109,5 +109,12 @@ public class GEA : Enemy
         //Désactiver hitbox
         yield return new WaitForSeconds(3f);
         this.gameObject.SetActive(false);
+    }
+
+    private IEnumerator AttaqueCo(){
+        // animator.SetBool("isDead", true);
+        // //Désactiver hitbox
+        // yield return new WaitForSeconds(3f);
+        // this.gameObject.SetActive(false);
     }
 }
