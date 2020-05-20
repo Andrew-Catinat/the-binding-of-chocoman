@@ -10,6 +10,8 @@ public class Player : Entity
 {
     PlayerState currentState = PlayerState.walk;
     Weapon weapon;
+    private float invulnerabilityTime = 0.5f;
+    private bool invulnerable = false;
 
     
     public Player():base(){
@@ -30,7 +32,7 @@ public class Player : Entity
         }
     }
 
-    public override  void Move()
+    public override void Move()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");    
@@ -53,13 +55,32 @@ public class Player : Entity
     }
 
     public override void TakeDamage(int damage){
-        //Ajouter Animation de dégats
-        base.TakeDamage(damage);
+        if(!this.invulnerable){
+            base.TakeDamage(damage);
+            StartCoroutine(DamageTakenCo());
+        }
     }
 
     public override void Die(){
-
+        this.dead = true;
+        StartCoroutine(DieCo());
     }
 
+    private IEnumerator DamageTakenCo(){
+        animator.SetBool("takeDamage", true);
+        this.invulnerable = true;
+        //Attendre la fin de l'animation
+        yield return null;
+        yield return new WaitForSeconds(this.invulnerabilityTime);
+        animator.SetBool("takeDamage", false);
+        this.invulnerable = false;
+    }
+
+    private IEnumerator DieCo(){
+        animator.SetBool("dead", true);
+        //Changement de scene : A implementer
+        yield return new WaitForSeconds(1f);
+        this.gameObject.SetActive(false);
+    }
 
 }

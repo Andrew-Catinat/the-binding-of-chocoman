@@ -4,24 +4,40 @@ using UnityEngine;
 
 
 public class GEA : Enemy
-{
+{  
+
+    private Player player;
+
     public GEA():base(){
         this.health = 4;
         this.strength = 1;
         this.dexterity = 1;
         this.moveSpeed = 4f;
-        this.attackRadius = 2f;
+        this.attackRadius = 1f;
     }
 
     void Start(){
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
         target = GameObject.FindWithTag("Player").transform;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {   
-        if(!dead)
-            Move();
+        //Player alive
+        if(!player.isDead()){
+            if(target != null){
+                //ennemy not dead
+                if(!dead){
+                    Move();
+                    if(Vector3.Distance(target.position, transform.position) < attackRadius){
+                        Attack();
+                    }
+                }
+            }    
+        }else{
+            this.rb.Sleep();
+        }        
     }
 
     public override void Move(){
@@ -69,13 +85,17 @@ public class GEA : Enemy
     public override void TakeDamage(int damage)
     {
         StartCoroutine(DamageTakenCo());
-        Debug.Log(this.health);
         base.TakeDamage(damage);
     }
 
     public override void Die(){
         this.dead = true;
         StartCoroutine(DieCo());
+    }
+
+    private void Attack(){
+        player.TakeDamage(this.GetStrength());
+        StartCoroutine(AttackCo());
     }
 
     private IEnumerator DamageTakenCo(){
@@ -88,7 +108,14 @@ public class GEA : Enemy
     private IEnumerator DieCo(){
         animator.SetBool("isDead", true);
         //Désactiver hitbox
+        this.rb.isKinematic = true;
         yield return new WaitForSeconds(3f);
         this.gameObject.SetActive(false);
+    }
+
+    private IEnumerator AttackCo(){
+        animator.SetBool("attack", true);
+        yield return null;
+        animator.SetBool("attack", false);
     }
 }
