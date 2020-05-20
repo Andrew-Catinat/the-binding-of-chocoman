@@ -8,8 +8,8 @@ public abstract class Item : MonoBehaviour
     new public string name;
 
     private void OnTriggerEnter2D(Collider2D collision){
-
-        Interact();
+        if (collision.gameObject.tag == "Player")
+            Interact();
 
     }
 

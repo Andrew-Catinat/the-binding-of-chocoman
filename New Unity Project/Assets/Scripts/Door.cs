@@ -16,6 +16,7 @@ public class Door : MonoBehaviour
 
     public void hide(){
         this.GetComponent<Renderer>().enabled = false;
+        this.transfer.GetComponent<Collider2D>().enabled = false;
     }
 
 }
