@@ -3898,6 +3898,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3178969500605574365, guid: 2777b505e1d042948b2cd807d5b07594,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3178969500605574367, guid: 2777b505e1d042948b2cd807d5b07594,
         type: 3}
       propertyPath: m_SortingOrder
@@ -11184,6 +11189,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2959163583426803226, guid: 69b770eb731dba94c91c47751861face, type: 3}
   room: {fileID: -6308777373758325733, guid: c549c422d1b0405478cd7d05be53269e, type: 3}
+  numberLine: 4
+  numberCol: 3
 --- !u!1 &2108469018
 GameObject:
   m_ObjectHideFlags: 0
