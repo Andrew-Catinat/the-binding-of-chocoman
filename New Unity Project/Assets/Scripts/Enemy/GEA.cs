@@ -17,8 +17,8 @@ public class GEA : Enemy
     }
 
     void Start(){
-        player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        target = GameObject.FindWithTag("Player").transform;
+        player = GameManager.GetPlayer();
+        target = player.transform;
     }
 
     // Update is called once per frame
