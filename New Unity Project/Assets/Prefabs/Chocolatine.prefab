@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1208542880962519211}
   - component: {fileID: 6313132143547027189}
   - component: {fileID: 1208542880962519213}
-  - component: {fileID: 5188300016005037924}
+  - component: {fileID: 1068683459}
   m_Layer: 0
   m_Name: Chocolatine
   m_TagString: Untagged
@@ -51,7 +51,7 @@ PolygonCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2, y: 2}
-    newSize: {x: 2, y: 2}
+    newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -110,13 +110,13 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5188300016005037924
+--- !u!114 &1068683459
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,3 +130,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Chocolatine
   type: 1
+  sprite: {fileID: 1208542880962519213}
+  box: {fileID: 6313132143547027189}
+  firePointUp: {fileID: 0}
+  firePointDown: {fileID: 0}
+  firePointLeft: {fileID: 0}
+  firePointRight: {fileID: 0}
+  chocolatinePrefab: {fileID: 6328801048986121014, guid: 41e7d6fdd78af374db447de0856811be,
+    type: 3}
+  speedBullet: 20
+  bulletFire: 1.5

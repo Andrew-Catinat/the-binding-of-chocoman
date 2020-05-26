@@ -9,7 +9,7 @@ public class GEA : Enemy
     private Player player;
 
     public GEA():base(){
-        this.health = 4;
+        this.health = 20;
         this.strength = 1;
         this.dexterity = 1;
         this.moveSpeed = 4f;

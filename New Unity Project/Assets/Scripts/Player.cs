@@ -9,27 +9,62 @@ public enum PlayerState{
 public class Player : Entity
 {
     PlayerState currentState = PlayerState.walk;
-    Weapon weapon;
+    public Weapon weapon;
     private float invulnerabilityTime = 0.5f;
     private bool invulnerable = false;
 
     
     public Player():base(){
-        this.health = 2;
-        this.strength = 2;
+        this.health = 4; 
+        this.strength = 10;
         this.dexterity = 2;
         this.moveSpeed = 5f;
+    }
+
+    public void SetWeapon(Weapon weapon){
+        this.weapon = weapon;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("attack") && currentState != PlayerState.attack){
-            StartCoroutine(AttackCo());
+        // if(ButtonPress() && currentState != PlayerState.attack){
+        //     //Animation
+        //     //StartCoroutine(AttackCo());
+        // }
+        if(this.weapon != null){
+            ButtonPress();   
         }
-        else if(currentState == PlayerState.walk){
+        if(currentState == PlayerState.walk){
             Move();
         }
+    }
+
+    private void ButtonPress(){
+        if(Input.GetButtonDown("FireUp")){
+             this.weapon.Attack("up");
+             PlayAnimationAttack();
+        }
+        if(Input.GetButtonDown("FireDown")){
+             this.weapon.Attack("down");
+             PlayAnimationAttack();
+        }
+        if(Input.GetButtonDown("FireLeft")){
+             this.weapon.Attack("left");
+             PlayAnimationAttack();
+        }
+        if(Input.GetButtonDown("FireRight")){
+             this.weapon.Attack("right");
+             PlayAnimationAttack();
+        }
+    }
+
+    private void PlayAnimationAttack(){
+        if(this.weapon.type == WeaponType.Corps_a_Corps){
+            StartCoroutine(AttackCo());
+        }else if(this.weapon.type == WeaponType.Distance){
+            //Debug.Log("Animation distance manquate...");
+        } 
     }
 
     public override void Move()

@@ -123,3 +123,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Keyboard
   type: 0
+  sprite: {fileID: 10918891793730053}
+  box: {fileID: 3919565619864470956}
